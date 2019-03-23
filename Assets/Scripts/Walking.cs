@@ -50,7 +50,7 @@ public class Walking : MonoBehaviour
 
     void checkJumpHeight()
     {
-        Debug.Log(gameObject.transform.position.y);
+        //Debug.Log(gameObject.transform.position.y);
     }
 
     private void PlayerMovement()

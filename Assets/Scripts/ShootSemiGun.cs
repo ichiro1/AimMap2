@@ -99,7 +99,7 @@ public class ShootSemiGun : MonoBehaviour {
     void ShootGun() {
 		RaycastHit hit;
 		if(Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit)) {
-
+            Debug.Log(hit.transform.name);
             RaycastTargetHit target = hit.transform.GetComponent<RaycastTargetHit>();
 			if(target != null && isEquipped == false) {
 				target.TakeDamage(damage);

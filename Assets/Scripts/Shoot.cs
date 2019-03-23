@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour {
 	public AudioSource aud;
 	public AudioSource aud2;
     public AudioSource aud3;
+    public AudioSource aud4;
 	private float frameShotCount = 9;
     private bool isEquipped = false;
 
@@ -24,6 +25,7 @@ public class Shoot : MonoBehaviour {
 		aud.GetComponent<AudioSource> ();
 		aud2.GetComponent<AudioSource> ();
         aud3.GetComponent<AudioSource>();
+        aud4.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -40,24 +42,41 @@ public class Shoot : MonoBehaviour {
             if(isEquipped == true) {
                 aud.mute = !aud.mute;
                 isEquipped = false;
-                if (AmountOfBullets <= 0) {
-            ifAmmoRemaining = false;
-                aud2.Play();
-            }
-            if(AmountOfBullets > 0) {
-                ifAmmoRemaining = true;
-            }
 
             }
 
         }
 
-		if(isEquipped == false) {
+
+        if (AmountOfBullets == 0)
+        {
+            ifAmmoRemaining = false;
+            aud = aud2;
+            //aud2.Play();
+            //AmountOfBullets = 5;
+            anim.Stop();
+        }
+        if(AmountOfBullets <= -2) {
+            AmountOfBullets += 1;
+        }
+
+        if (AmountOfBullets > 0)
+        {
+            aud = aud4;
+            ifAmmoRemaining = true;
+
+            
+        }
+
+
+
+        if (isEquipped == false) {
 			AmmoCountText.text = AmountOfBullets + "/30";
             if (Input.GetKeyDown("r"))
             {
                 AmountOfBullets = 30;
                 aud3.Play();
+
             }
 
             if (Input.GetKeyDown("v")) {
@@ -80,7 +99,13 @@ public class Shoot : MonoBehaviour {
             frameShotCount = 14;
 		}
 		if (frameShotCount == 15) {
-			aud.Play ();
+
+            if(ifAmmoRemaining == false) {
+                aud2.Play();
+            }
+            else if(ifAmmoRemaining == true) {
+                aud.Play();
+            }
 			if(isEquipped == false) {
 				AmountOfBullets -=1;
 			}
@@ -102,8 +127,8 @@ public class Shoot : MonoBehaviour {
 	void ShootGun() {
 		RaycastHit hit;
 		if(Physics.Raycast(Cam.transform.position, Cam.transform.forward,out hit)) {
-
-			RaycastTargetHit target = hit.transform.GetComponent<RaycastTargetHit>();
+            Debug.Log(hit.transform.name);
+            RaycastTargetHit target = hit.transform.GetComponent<RaycastTargetHit>();
 			if(target != null && isEquipped == false) {
 				target.TakeDamage(damage);
 			}

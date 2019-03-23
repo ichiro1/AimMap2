@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\RaycastTargetHit.cs" />
     <Compile Include="Assets\Scripts\ScopeIn.cs" />
     <Compile Include="Assets\Scripts\Shoot.cs" />
-    <Compile Include="Assets\Scripts\ShootBullet.cs" />
     <Compile Include="Assets\Scripts\ShootSemiGun.cs" />
     <Compile Include="Assets\Scripts\TargetRandomPosition.cs" />
     <Compile Include="Assets\Scripts\Walking.cs" />
